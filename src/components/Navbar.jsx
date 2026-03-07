@@ -1,39 +1,36 @@
 const planets = [
-    "Earth",
-    "Sun",
-    "lol",
-    "okayyy okayy",
-]
-export default function Navbar() {
-  return (
-    <div className="navbar bg-base-900 shadow-sm">
-      
+  "Sun",
+  "Mercury",
+  "Venus",
+  "Earth",
+  "Mars",
+  "Jupiter",
+  "Saturn",
+  "Uranus",
+  "Neptune",
+];
 
-      {planets.map((planetName, i) => (
-        <div className="flex-1">
-            <a className="btn btn-ghost text-xl">{planetName} ... {i}</a>
-        </div>
-      ))}
-      
-      
-      <div className="flex-none">
-        <button className="btn btn-square btn-ghost">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            className="inline-block h-5 w-5 stroke-current"
+export default function Navbar({ currentPage, setPage }) {
+  return (
+    <nav className="flex justify-center gap-8 flex-wrap pt-5 pb-10">
+      {planets.map((planetName, index) => {
+        return (
+          <button
+            onClick={function (x) {
+              setPage(planetName);
+              if (x.target.innerText.toLowerCase() != currentPage.toLowerCase()) {
+                const index = planets.indexOf(planetName)
+                planets.splice(index, 1);
+                planets.push(planetName);
+              }
+            }}
+            className={`text-sm uppercase tracking-[0.3em] transition-colors active:text-gray-600 hover:text-white ${currentPage === planetName ? "text-white" : "text-white/40"}`}
+            key={index}
           >
-            {" "}
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
-            ></path>{" "}
-          </svg>
-        </button>
-      </div>
-    </div>
+            {planetName}
+          </button>
+        );
+      })}
+    </nav>
   );
 }

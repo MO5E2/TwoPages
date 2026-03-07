@@ -1,3 +1,7 @@
 export default function PageOne() {
-    return <p>One</p>
+    return (
+        <main>
+            One
+        </main>
+    )
 }
